@@ -26,4 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
             header.style.position = 'absolute';
         }
     });
+
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            // Close other items
+            faqQuestions.forEach(item => {
+                if(item !== question) {
+                    item.classList.remove('active');
+                    item.nextElementSibling.style.maxHeight = null;
+                }
+            });
+
+            // Toggle current
+            question.classList.toggle('active');
+            const answer = question.nextElementSibling;
+            if (question.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                answer.style.maxHeight = null;
+            }
+        });
+    });
 });
